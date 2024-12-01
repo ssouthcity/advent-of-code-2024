@@ -59,9 +59,36 @@ executable aoc24
 test-suite aoc24-test
     import:           warnings
     type:             exitcode-stdio-1.0
-    main-is:          Main.hs
+    main-is:          Spec.hs
     build-depends:
         base ^>=4.18.2.1,
-        aoc24
+        aoc24,
+        HUnit
     hs-source-dirs:   test
+    other-modules:
+      Day01Spec
+      Day02Spec
+      Day03Spec
+      Day04Spec
+      Day05Spec
+      Day06Spec
+      Day07Spec
+      Day08Spec
+      Day09Spec
+      Day10Spec
+      Day11Spec
+      Day12Spec
+      Day13Spec
+      Day14Spec
+      Day15Spec
+      Day16Spec
+      Day17Spec
+      Day18Spec
+      Day19Spec
+      Day20Spec
+      Day21Spec
+      Day22Spec
+      Day23Spec
+      Day24Spec
+      Day25Spec
     default-language: Haskell2010
