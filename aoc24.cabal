@@ -20,7 +20,8 @@ library
     build-depends:    
       base ^>=4.18.2.1,
       attoparsec >=0.13,
-      text >=2.0
+      text >=2.0,
+      containers >=0.6
     exposed-modules:
       Day01
       Day02
