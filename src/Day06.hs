@@ -1,5 +1,3 @@
-{-# LANGUAGE TupleSections #-}
-
 module Day06 where
 
 import Data.List as List
@@ -30,9 +28,6 @@ parseInput input = (obstacles, bounds, guardDir, guardPos)
 inBounds :: Coord -> Coord -> Bool
 inBounds (cols, rows) (x, y) = x >= 0 && x < cols && y >= 0 && y < rows
 
-isFacingObstacle :: Set Coord -> Dir -> Coord -> Bool
-isFacingObstacle obstacles dir pos = move dir pos `member` obstacles
-
 patrol :: (Set Coord, Coord, Dir, Coord) -> [(Coord, Dir)]
 patrol (obstacles, bounds, dir, pos)
   | outOfBounds = []
@@ -44,18 +39,18 @@ patrol (obstacles, bounds, dir, pos)
     facingObstacle = nextPos `member` obstacles
 
 traps :: (Set Coord, Coord, Dir, Coord) -> [Coord]
-traps state@(obstacles, bounds, _, _) = List.map (\p -> move (snd (head p)) (fst (head p))) $ List.filter go $ backtrackPatrol state
+traps state@(obstacles, bounds, dir, pos) = List.filter go visited
   where
-    backtrackPatrol = tails . reverse . patrol
-    moveUntilObstacle dir pos = takeWhile (\p -> inBounds bounds p && not (p `member` obstacles)) (iterate (move dir) pos)
-    go ((pos', dir') : xs) = any (`elem` xs) fakePath
-      where
-        fakePath = List.map (,clockwise dir') $ moveUntilObstacle (clockwise dir') pos'
-    go _ = False
+    visited = List.map fst $ patrol state
+    go coord =
+      let newObstacles = Set.insert coord obstacles
+       in isLoop $ patrol (newObstacles, bounds, dir, pos)
 
-test (obstacles, bounds, dir, pos) = isFacingObstacle obstacles E (myMove pos)
+isLoop :: (Eq a) => [a] -> Bool
+isLoop a = go a a
   where
-    myMove = move N . move N . move N . move N . move N . move E . move E . move E . move E
+    go (x : xs) (_ : y : ys) = x == y || go xs ys
+    go _ _ = False
 
 solvePart1 :: String -> String
 solvePart1 = show . length . nub . List.map fst . patrol . parseInput
