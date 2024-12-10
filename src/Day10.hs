@@ -33,10 +33,15 @@ reachablePeaks tmap current@(x, y)
 trailscore :: TopoMap -> Coord -> Int
 trailscore tmap trail = length . nub $ reachablePeaks tmap trail
 
+trailrating :: TopoMap -> Coord -> Int
+trailrating tmap trail = length $ reachablePeaks tmap trail
+
 solvePart1 :: String -> String
 solvePart1 input =
   let tmap = topomap input
    in show $ sum $ map (trailscore tmap) $ trailheads tmap
 
 solvePart2 :: String -> String
-solvePart2 input = "unimplemented"
+solvePart2 input =
+  let tmap = topomap input
+   in show $ sum $ map (trailrating tmap) $ trailheads tmap
