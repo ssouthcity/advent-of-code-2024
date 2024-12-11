@@ -15,7 +15,7 @@ testPart1 =
 testPart2 :: Test
 testPart2 =
   let input = sample
-      answer = "unimplemented"
+      answer = "65601038650482"
    in TestCase $ assertEqual "" answer $ Day11.solvePart2 input
 
 tests :: Test
