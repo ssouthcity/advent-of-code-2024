@@ -3,15 +3,18 @@ module Day11Spec (tests) where
 import qualified Day11
 import Test.HUnit
 
+sample :: String
+sample = "125 17"
+
 testPart1 :: Test
 testPart1 =
-  let input = ""
-      answer = "unimplemented"
+  let input = sample
+      answer = "55312"
    in TestCase $ assertEqual "" answer $ Day11.solvePart1 input
 
 testPart2 :: Test
 testPart2 =
-  let input = ""
+  let input = sample
       answer = "unimplemented"
    in TestCase $ assertEqual "" answer $ Day11.solvePart2 input
 
