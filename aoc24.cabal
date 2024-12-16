@@ -52,6 +52,7 @@ library
       Day25
       Input
       Solvers
+      Vec2
 
 executable aoc24
     import:           warnings
