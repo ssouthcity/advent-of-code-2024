@@ -22,6 +22,9 @@ west = (-1, 0)
 add :: Vec2 -> Vec2 -> Vec2
 add (x, y) (x', y') = (x + x', y + y')
 
+mult :: Vec2 -> Vec2 -> Vec2
+mult (x, y) (x', y') = (x * x', y * y')
+
 normalize :: Vec2 -> Vec2
 normalize (x, y) = (normalize' x, normalize' y)
   where
