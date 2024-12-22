@@ -77,7 +77,7 @@ safetyScore :: Vec2 -> [Robot] -> Int
 safetyScore bounds = product . countQuadrants bounds . map position
 
 findTree :: Vec2 -> [Robot] -> (Int, [Robot])
-findTree bounds robots = minimumBy (comparing avgPairwiseDistance `on` snd) $ robotIterations 1 robots
+findTree bounds robots = minimumBy (comparing entropy `on` snd) $ robotIterations 1 robots
   where
     timelapse' = timelapse bounds 1
 
@@ -88,8 +88,8 @@ findTree bounds robots = minimumBy (comparing avgPairwiseDistance `on` snd) $ ro
       where
         rs' = timelapse' rs
 
-    avgPairwiseDistance :: [Robot] -> Float
-    avgPairwiseDistance rs = sum distances
+    entropy :: [Robot] -> Float
+    entropy rs = sum distances
       where
         points = map position rs
         center = (fst bounds `div` 2, snd bounds `div` 2)
